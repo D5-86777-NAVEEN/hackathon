@@ -34,7 +34,7 @@ public class main {
 		System.out.println("1. Show Veg Menu");
 		System.out.println("2. Show Non-Veg Menu");
 		System.out.println("3. Show available sizes (for given Item id)");
-		System.out.println("4. Add to cart ");
+		System.out.println("4. Add to cart (for given price id) ");
 		System.out.println("5. Show Cart (Pizzas with Size & Price Details)");
 		System.out.println("6. Place Order (Save Order in Database for current customer)");
 		System.out.println("7. Sign Out");
@@ -67,7 +67,7 @@ public class main {
 				int cflag=0;
 				cflag=p.checkCustomer(email,pass);
 				if(p.checkAdmin(email,pass)) {
-					System.out.println("Login successfull as admin");
+					System.out.println("Login successfull as Admin");
 					int choice1;
 					while((choice1=adminMenu())!=3) {
 						if(choice1==1)
@@ -76,6 +76,8 @@ public class main {
 							o.showOrders();
 						else if(choice1==0)
 							System.exit(0);
+						else
+							System.out.println("Enter a Valild Choice");
 					}
 					
 				}
@@ -97,6 +99,8 @@ public class main {
 						
 						else if(choice2==0)
 							System.exit(0);
+						else
+							System.out.println("Enter a Valild Choice");
 					}
 				}
 				
@@ -105,6 +109,8 @@ public class main {
 			else if(choice==2) {
 				p.addCustomer(sc);
 			}
+			else
+				System.out.println("Enter a Valild Choice");
 		}
 		
 

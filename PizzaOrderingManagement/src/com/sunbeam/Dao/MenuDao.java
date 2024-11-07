@@ -17,6 +17,7 @@ public class MenuDao {
 		
 		try(PreparedStatement ps=connection.prepareStatement("select * from PIZZA_ITEMS")){
 			ResultSet rs=ps.executeQuery();
+			System.out.println("[Id , Pizza_name , Type , Category , Toppings ]");
 			while(rs.next()) {
 				int id=rs.getInt(1);
 				String pizza_name=rs.getString(2);
@@ -34,6 +35,7 @@ public class MenuDao {
 	public void NonVegPizza(){
 		try(PreparedStatement ps=connection.prepareStatement("select * from PIZZA_ITEMS")){
 			ResultSet rs=ps.executeQuery();
+			System.out.println("[Id , Pizza_name , Type , Category , Toppings ]");
 			while(rs.next()) {
 				int id=rs.getInt(1);
 				String pizza_name=rs.getString(2);
@@ -51,11 +53,12 @@ public class MenuDao {
 	
 	public void pizza_sizes()  {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("enter pizza id you want");
+		System.out.println("enter Item id you want");
 		int a=sc.nextInt();
 		try(PreparedStatement ps=connection.prepareStatement("select pizza_pricing.id , sizes,price from pizza_pricing , pizza_items where pizza_items.id=itemid and itemid=?")){
 			ps.setInt(1, a);
 			ResultSet rs=ps.executeQuery();
+			System.out.println("[ Id , Size , Price ]");
 			while(rs.next()) {
 				int id=rs.getInt(1);
 				String size=rs.getString(2);

@@ -21,6 +21,7 @@ public class OrdersDao {
 	public void Allorders(){
 		try(PreparedStatement ps=connection.prepareStatement("select * from PIZZA_ORDERS")){
 			ResultSet rs=ps.executeQuery();
+			System.out.println("[Order ID , CustomerId , OrderTime , STATUS ]");
 			while(rs.next()) {
 				int id=rs.getInt(1);
 				int cid=rs.getInt(2);
@@ -36,19 +37,21 @@ public class OrdersDao {
 		}
 	public void showOrders(){
 		Scanner sc = new Scanner(System.in);
-		System.out.println("enter order id you want");
+		System.out.println("Enter Order id :");
 		int a=sc.nextInt();
-		try(PreparedStatement ps=connection.prepareStatement("SELECT PIZZA_ITEMS.Name ,PIZZA_CUSTOMERS.Name ,PIZZA_CUSTOMERS.Mobile,PIZZA_CUSTOMERS.Email,PIZZA_CUSTOMERS.Address FROM PIZZA_ITEMS JOIN PIZZA_PRICING ON PIZZA_PRICING.ITEMID = PIZZA_ITEMS.ID JOIN PIZZA_ORDERDETAILS ON PIZZA_PRICING.ID = PIZZA_ORDERDETAILS.PRICEID JOIN PIZZA_ORDERS ON PIZZA_ORDERDETAILS.OrderId = PIZZA_ORDERS.ID JOIN PIZZA_CUSTOMERS ON PIZZA_ORDERS.CustomerId = PIZZA_CUSTOMERS.ID and orderid =?")){
+		try(PreparedStatement ps=connection.prepareStatement("SELECT PIZZA_ITEMS.Name,PIZZA_PRICING.sizes ,PIZZA_CUSTOMERS.Name ,PIZZA_CUSTOMERS.Mobile,PIZZA_CUSTOMERS.Email,PIZZA_CUSTOMERS.Address FROM PIZZA_ITEMS JOIN PIZZA_PRICING ON PIZZA_PRICING.ITEMID = PIZZA_ITEMS.ID JOIN PIZZA_ORDERDETAILS ON PIZZA_PRICING.ID = PIZZA_ORDERDETAILS.PRICEID JOIN PIZZA_ORDERS ON PIZZA_ORDERDETAILS.OrderId = PIZZA_ORDERS.ID JOIN PIZZA_CUSTOMERS ON PIZZA_ORDERS.CustomerId = PIZZA_CUSTOMERS.ID and orderid =?")){
 			ps.setInt(1, a);
 			ResultSet rs=ps.executeQuery();
+			System.out.println("[Item Name , Size , Customer Name , Mobile , Email , Address ]");
 			while(rs.next()) {
 				String pname=rs.getString(1);
-				String cname=rs.getString(2);
-				String mob=rs.getString(3);
-				String email=rs.getString(4);
-				String add=rs.getString(5);
+				String size=rs.getString(2);
+				String cname=rs.getString(3);
+				String mob=rs.getString(4);
+				String email=rs.getString(5);
+				String add=rs.getString(6);
 
-				System.out.println(pname+" "+cname+" "+mob+" "+email+" "+add);
+				System.out.println(pname+" "+size+" "+cname+" "+mob+" "+email+" "+add);
 				
 		}
 		} catch (SQLException e) {
@@ -58,7 +61,7 @@ public class OrdersDao {
 	
 	public void addCart()  {
 		Scanner sc=new Scanner(System.in);
-		System.out.println("enter pizza id you want");
+		System.out.print("Enter Item id : ");
 		int a=sc.nextInt();
 		try(PreparedStatement ps=connection.prepareStatement("select pizza_pricing.id,sizes,price from pizza_pricing,pizza_items where pizza_items.id=pizza_pricing.itemid and pizza_pricing.id=?")){
 			ps.setInt(1, a);

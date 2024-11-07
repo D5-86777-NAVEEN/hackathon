@@ -27,7 +27,7 @@ public class LoginDao  implements AutoCloseable{
 			ps.setString(4, s.getAddress());
 			ps.setString(5, s.getEmail());
 			if(ps.executeUpdate()!=0) {
-				System.out.println("sucessfully signedup");
+				System.out.println("Sucessfully Signedup");
 			}
 			else
 			{
